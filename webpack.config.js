@@ -11,7 +11,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                include: [__dirname + '/demo'],
+                include: [
+                    __dirname + '/demo',
+                    __dirname + '/node_modules/codemirror/',
+                ],
                 loader: 'style-loader!css-loader',
             },
         ],
