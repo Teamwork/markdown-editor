@@ -47,6 +47,7 @@
     "tsc": "tsc -b packages/*",
     "test": "jest",
     "build": "run-s clean prettier tslint tsc test",
+    "demo": "webpack",
     "start": "run-p start:*",
     "start:demo": "webpack-dev-server -d",
     "start:tsc": "tsc -b -w packages/*"
@@ -55,7 +56,7 @@
     "hooks": {
       "commit-msg": "[ $(git rev-parse --abbrev-ref HEAD) != 'master' ] || commitlint --edit $HUSKY_GIT_PARAMS",
       "pre-commit": "npm run build",
-      "pre-push": "[ $(git rev-parse --abbrev-ref HEAD) != 'master' ] || webpack && [ -z \"$(git status --porcelain)\" ]"
+      "pre-push": "[ $(git rev-parse --abbrev-ref HEAD) != 'master' ] || run-s build demo && [ -z \"$(git status --porcelain)\" ]"
     }
   },
   "commitlint": {
