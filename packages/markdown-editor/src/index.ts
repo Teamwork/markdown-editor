@@ -1,1 +1,1 @@
-export * from './editor'
+import './editor'

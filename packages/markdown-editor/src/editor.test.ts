@@ -1,5 +1,8 @@
-import { editor } from '.'
+/**
+ * @jest-environment jsdom
+ */
+import '.'
 
-test('editor', () => {
-    expect(editor).toBeUndefined()
+test('TODO', () => {
+    expect(1 + 1).toBe(2)
 })

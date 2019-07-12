@@ -3,3 +3,10 @@
 # @teamwork/markdown-editor
 
 An advanced markdown editor used in the Teamwork product suite.
+
+## Demo
+
+```
+npm i
+npm start
+```

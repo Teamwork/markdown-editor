@@ -1,7 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+    mode: 'development',
     entry: __dirname + '/demo/index.js',
+    output: {
+        path: __dirname + '/docs/',
+    },
     module: {
         rules: [
             {
@@ -14,6 +18,7 @@ module.exports = {
                 include: [
                     __dirname + '/demo',
                     __dirname + '/node_modules/codemirror/',
+                    __dirname + '/packages/',
                 ],
                 loader: 'style-loader!css-loader',
             },
@@ -25,6 +30,7 @@ module.exports = {
         }),
     ],
     devServer: {
+        open: true,
         port: 8023,
     },
 }

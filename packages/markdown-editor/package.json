@@ -6,11 +6,12 @@
     "markdown",
     "editor"
   ],
-  "sideEffects": false,
+  "sideEffects": true,
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "/lib",
+    "/theme/",
+    "/lib/",
     "!/lib/**/*.test.js",
     "!/lib/**/*.test.d.ts"
   ],
@@ -27,6 +28,8 @@
     "access": "public"
   },
   "dependencies": {
+    "@types/debug": "^4.1.4",
+    "debug": "^4.1.1",
     "tslib": "^1.9.3"
   },
   "peerDependencies": {
