@@ -2,6 +2,10 @@
     font-family: sans-serif;
 }
 
+.cm-s-rich-text .cm-formatting {
+    opacity: 0.4;
+}
+
 .cm-s-rich-text .cm-header {
     font-weight: bold;
 }
