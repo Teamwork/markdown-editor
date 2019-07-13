@@ -56,8 +56,9 @@ class RichTextMarkdown {
         if (
             modeOption &&
             modeOption.name === 'markdown' &&
-            modeOption.highlightFormatting === true &&
-            modeOption.fencedCodeBlockHighlighting === false
+            modeOption.highlightFormatting &&
+            !modeOption.fencedCodeBlockHighlighting &&
+            !modeOption.allowAtxHeaderWithoutSpace
         ) {
             for (
                 let i = 0, l = this.codeMirror.getDoc().lineCount();
@@ -79,14 +80,7 @@ class RichTextMarkdown {
         for (let i = 0, l = lineTokens.length; i < l; ++i) {
             const token = lineTokens[i]
 
-            // `token.state.formatting` is always `false` for tokens retrieved using
-            // `this.codeMirror.getLineTokens`. `this.codeMirror.getTokensAt` returns
-            // a correct state, however, it is less efficient, so we rely on `token.type`.
-            // if (token.state.formatting) {
-            if (
-                token.type != null &&
-                /(^|\s)formatting($|\s)/.test(token.type)
-            ) {
+            if (this.shouldHide(token, i, lineTokens)) {
                 const mark = this.codeMirror
                     .getDoc()
                     .markText(
@@ -117,6 +111,33 @@ class RichTextMarkdown {
                 mark.clear()
             }
         }
+    }
+
+    private shouldHide(
+        token: CodeMirror.Token,
+        _index: number,
+        _tokens: CodeMirror.Token[],
+    ): boolean {
+        if (token.type == null) {
+            // plain text
+            return false
+        }
+
+        // `token.state.formatting` is always `false` for tokens retrieved using
+        // `this.codeMirror.getLineTokens`. `this.codeMirror.getTokensAt` returns
+        // a correct state, however, it is less efficient, so we rely on `token.type`.
+        // if (!token.state.formatting) {
+        if (!/(^|\s)formatting($|\s)/.test(token.type)) {
+            // styled text
+            return false
+        }
+
+        if (token.state.header === token.string.length) {
+            // '#' header formatting characters not followed by a space
+            return false
+        }
+
+        return true
     }
 
     private onOptionChange = (
