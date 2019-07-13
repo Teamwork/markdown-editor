@@ -56,7 +56,7 @@
     "hooks": {
       "commit-msg": "[ $(git rev-parse --abbrev-ref HEAD) != 'master' ] || commitlint --edit $HUSKY_GIT_PARAMS",
       "pre-commit": "npm run build",
-      "pre-push": "[ $(git rev-parse --abbrev-ref HEAD) != 'master' ] || run-s build demo && [ -z \"$(git status --porcelain)\" ]"
+      "pre-push": "[ $(git rev-parse --abbrev-ref HEAD) != 'master' ] || (run-s build demo && [ -z \"$(git status --porcelain)\" ])"
     }
   },
   "commitlint": {
