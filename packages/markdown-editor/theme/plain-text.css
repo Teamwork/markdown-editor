@@ -1,3 +1,7 @@
+.cm-s-plain-text {
+    font-family: sans-serif;
+}
+
 .cm-s-plain-text .cm-header,
 .cm-s-plain-text .cm-strong {
     font-weight: normal;
